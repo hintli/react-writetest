@@ -9,9 +9,9 @@ class SpeedCheck extends Component {
     render() {
         return (
             <React.Fragment>
-                <Info challenge={this.challenge}/>
+                <Info challenge={this.challenge} />
                 <hr />
-                <ChallengeInput />
+                <ChallengeInput challenge={this.challenge} />
                 <hr />
                 <Score />
             </React.Fragment>

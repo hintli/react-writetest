@@ -1,7 +1,8 @@
 import React from 'react'
 
-const Info = () => {
-    const {challenge} = this.props;
+const Info = (props) => {
+    //const {challenge} = this.props;
+    //console.log(this.props)
     return (
         <div className="card text-center border border-info">
                     <div className="card-header">
@@ -13,7 +14,7 @@ const Info = () => {
                         <p>Ayrıca karakter sınırını aştığınızda test otomatik olarak sonlanacaktır.</p>
                     </div>
                     <div className="card-footer">
-                        {challenge}
+                        {props.challenge}
                     </div>
         </div>
     )

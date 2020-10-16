@@ -1,27 +1,51 @@
 import React from 'react'
 
+const initialState = {
+    entry: '',
+    isDisabled: false
+}
+
 class ChallengeInput extends React.Component {
-    state = {
-        entry:''
-    }
+    
+    challenge = this.props.challenge;
+    state = initialState;
+    keyMap = []
 
     changeHandler = (e) => {
         this.setState({
+            ...this.state,
             [e.target.name] : e.target.value
         })
-        console.log(this.state.entry)
     }
 
     resetState = () => {
-        this.setState({
-            entry: ""
-        })
+        this.setState(initialState);
+    }
+
+    keyDownHandler = (e) => {
+        this.keyMap[e.keyCode] = e.type === "keydown"
+        if (this.keyMap[17] && this.keyMap[13]) {
+            this.setState({
+                ...this.state,
+                isDisabled: true
+            })
+        }
+    }
+    keyUphandler = () => {
+        this.keyMap = []
+    }
+
+
+    componentDidMount() {
+        document.addEventListener("keydown", this.keyDownHandler);
+        document.addEventListener("keyup", this.keyUphandler);
     }
 
     render() {
+        const { entry, isDisabled } = this.state;
         return (
             <div className="input-group mb-3">
-                        <input type="text" className="form-control" name="entry" value={this.state.entry} onChange={this.changeHandler} placeholder="Metni giriniz" />
+                        <input type="text" className="form-control" name="entry" disabled={isDisabled} value={entry} onChange={this.changeHandler} placeholder="Metni giriniz" />
                         <div className="input-group-append">
                             <button className="btn btn-outline-secondary" onClick={this.resetState} type="button" id="reset">sıfırla</button>
                         </div>
